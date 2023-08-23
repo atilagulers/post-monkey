@@ -1,9 +1,8 @@
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
-import User from '../models/User';
+import User from '../models/User.js';
+import httpStatus from 'http-status';
 
 //* Register User
-export const register = async (req, res) => {
+export const register = async (req, res, next) => {
   try {
     const {
       firstName,
@@ -15,5 +14,23 @@ export const register = async (req, res) => {
       location,
       occupation,
     } = req.body;
-  } catch (error) {}
+
+    // hashes password in User Schema
+    const createdUser = await User.create({
+      firstName,
+      lastName,
+      email,
+      password,
+      picturePath,
+      friends,
+      location,
+      occupation,
+      viewedProfile: Math.floor(Math.random() * 10000),
+      impressions: Math.floor(Math.random() * 10000),
+    });
+
+    res.status(httpStatus.CREATED).json(createdUser);
+  } catch (error) {
+    next(error);
+  }
 };
