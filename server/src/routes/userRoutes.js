@@ -1,4 +1,4 @@
-import express, {Router} from 'express';
+import express from 'express';
 
 import {
   getUser,
@@ -8,8 +8,12 @@ import {
 
 const router = express.Router();
 
-//* GET
-router.get('/:id', getUser);
+// Get user by username
+router.get('/:username', getUser);
+
+// Update user by user id
+router.patch('/:userId', getUser);
+
 router.get('/id/friends', getUserFriends);
 
 //* UPDATE

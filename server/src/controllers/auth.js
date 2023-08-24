@@ -4,34 +4,34 @@ import UnauthenticatedError from '../errors/unauthenticated.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-//* REGISTER USER
+/**
+ * Handles user registration.
+ * @POST /auth/register
+ */
 export const register = async (req, res, next) => {
   try {
     const {
-      firstName,
-      lastName,
+      fullName,
+      username,
       email,
       password,
-      picturePath,
+      avatar,
+      posts,
       friends,
-      location,
-      occupation,
+      friendRequests,
     } = req.body;
 
     const salt = await bcrypt.genSalt();
     const passwordHashed = await bcrypt.hash(password, salt);
-
     const createdUser = await User.create({
-      firstName,
-      lastName,
+      fullName,
+      username,
       email,
       password: passwordHashed,
-      picturePath,
+      avatar,
+      posts,
       friends,
-      location,
-      occupation,
-      viewedProfile: Math.floor(Math.random() * 10000),
-      impressions: Math.floor(Math.random() * 10000),
+      friendRequests,
     });
 
     res.status(httpStatus.CREATED).json(createdUser);
@@ -40,11 +40,16 @@ export const register = async (req, res, next) => {
   }
 };
 
-//* LOGGING IN
+/**
+ * Handles user login.
+ * @POST /auth/login
+ */
 export const login = async (req, res) => {
   try {
-    const {email, password} = req.body;
-    const user = await User.findOne({email});
+    const {emailOrUsername, password} = req.body;
+    const user = await User.findOne({
+      $or: [{email: emailOrUsername}, {username: emailOrUsername}],
+    });
 
     if (!user) {
       throw new UnauthenticatedError('Invalid Credentials');
@@ -57,7 +62,11 @@ export const login = async (req, res) => {
     }
 
     const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET);
-    delete user.password;
-    res.status(httpStatus.OK).json({token, user});
-  } catch (error) {}
+    const userWithoutPassword = user.toObject();
+    delete userWithoutPassword.password;
+
+    res.status(httpStatus.OK).json({token, user: userWithoutPassword});
+  } catch (error) {
+    res.status(httpStatus.UNAUTHORIZED).json({error: error.message});
+  }
 };

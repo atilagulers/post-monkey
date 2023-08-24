@@ -1,11 +1,33 @@
 import httpStatus from 'http-status';
 import User from '../models/User.js';
 
-//* GET
+/**
+ * View User Details.
+ * @GET /users/:username
+ */
 export const getUser = async (req, res) => {
   try {
-    const {id} = req.params;
-    const user = await User.findById(id);
+    const {username} = req.params;
+    const user = await User.find({username});
+
+    res.status(httpStatus.OK).json(user);
+  } catch (error) {
+    next(error);
+  }
+};
+
+/**
+ * View User Details.
+ * @PATCH /users/:userId
+ */
+export const updateUser = async (req, res) => {
+  const {id: userId} = req.user;
+
+  try {
+    const user = await User.findByIdAndUpdate(userId, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     res.status(httpStatus.OK).json(user);
   } catch (error) {

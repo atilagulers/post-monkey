@@ -8,7 +8,6 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import {register} from './controllers/auth.js';
 
 //* CONFIGURATIONS
 const __filename = fileURLToPath(import.meta.url);
@@ -40,18 +39,25 @@ const storage = multer.diskStorage({
 const upload = multer({storage});
 
 //* MIDDLEWARES
-import errorHandler from './middleware/errorHandler.js';
-import notFound from './middleware/notFound.js';
-import {verifyToken} from './middleware/auth.js';
+import errorHandler from './src/middleware/errorHandler.js';
+import notFound from './src/middleware/notFound.js';
+import {verifyToken} from './src/middleware/auth.js';
 
 //* ROUTES WITH FILES
-app.post('/auth/register', upload.single('picture'), verifyToken, register);
+//import {createPost} from './controllers/posts.js';
+
+//import {register} from './src/controllers/auth.js';
+//app.post('/auth/register', upload.single('picture'), register);
+//app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 //* ROUTES
-import authRouter from './routes/auth.js';
-import usersRouter from './routes/users.js';
-app.use('/auth', authRouter);
-app.use('/users', verifyToken, usersRouter);
+import authRouter from './src/routes/authRoutes.js';
+import usersRouter from './src/routes/userRoutes.js';
+import postsRouter from './src/routes/postRoutes.js';
+
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', verifyToken, usersRouter);
+app.use('/api/v1/posts', verifyToken, postsRouter);
 
 app.use(errorHandler);
 app.use(notFound);
