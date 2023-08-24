@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import User from '../src/models/User.js';
+import User from '../models/User.js';
 
 /**
  * View User Details.
