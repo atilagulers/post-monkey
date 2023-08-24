@@ -48,8 +48,10 @@ import {verifyToken} from './middleware/auth.js';
 app.post('/auth/register', upload.single('picture'), verifyToken, register);
 
 //* ROUTES
-import auth from './routes/auth.js';
-app.use('/auth', auth);
+import authRouter from './routes/auth.js';
+import usersRouter from './routes/users.js';
+app.use('/auth', authRouter);
+app.use('/users', verifyToken, usersRouter);
 
 app.use(errorHandler);
 app.use(notFound);
