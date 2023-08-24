@@ -1,7 +1,10 @@
 import User from '../models/User.js';
 import httpStatus from 'http-status';
+import UnauthenticatedError from '../errors/unauthenticated.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
-//* Register User
+//* REGISTER USER
 export const register = async (req, res, next) => {
   try {
     const {
@@ -15,12 +18,14 @@ export const register = async (req, res, next) => {
       occupation,
     } = req.body;
 
-    // hashes password in User Schema
+    const salt = await bcrypt.genSalt();
+    const passwordHashed = await bcrypt.hash(password, salt);
+
     const createdUser = await User.create({
       firstName,
       lastName,
       email,
-      password,
+      password: passwordHashed,
       picturePath,
       friends,
       location,
@@ -33,4 +38,26 @@ export const register = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
+};
+
+//* LOGGING IN
+export const login = async (req, res) => {
+  try {
+    const {email, password} = req.body;
+    const user = await User.findOne({email});
+
+    if (!user) {
+      throw new UnauthenticatedError('Invalid Credentials');
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      throw new UnauthenticatedError('Invalid Credentials');
+    }
+
+    const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET);
+    delete user.password;
+    res.status(httpStatus.OK).json({token, user});
+  } catch (error) {}
 };

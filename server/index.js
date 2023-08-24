@@ -39,14 +39,20 @@ const storage = multer.diskStorage({
 
 const upload = multer({storage});
 
-//* ROUTES WITH FILES
-app.get('/auth/register', register);
-app.post('/auth/register', upload.single('picture'), register);
-
-//* ERROR HANDLER
+//* MIDDLEWARES
 import errorHandler from './middleware/errorHandler.js';
+import notFound from './middleware/notFound.js';
+import {verifyToken} from './middleware/auth.js';
+
+//* ROUTES WITH FILES
+app.post('/auth/register', upload.single('picture'), verifyToken, register);
+
+//* ROUTES
+import auth from './routes/auth.js';
+app.use('/auth', auth);
 
 app.use(errorHandler);
+app.use(notFound);
 
 //* MONGOOSE SETUP
 const PORT = process.env.PORT | 3000;
