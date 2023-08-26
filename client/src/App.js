@@ -1,31 +1,27 @@
-import {BrowserRouter, Navigate, Routes, Route} from 'react-router-dom';
+import {useState} from 'react';
+import {ThemeProvider} from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import {lightTheme, darkTheme} from './theme';
 
 // Pages
-import Home from 'Pages/Home';
-import Login from 'Pages/Login';
-import Profile from 'Pages/Profile';
-import {useMemo} from 'react';
-import {useSelector} from 'react-redux/es/hooks/useSelector';
-import {CssBaseline, ThemeProvider, createTheme} from '@mui/material';
-import {themeSettings} from './theme';
+import Home from './pages/Home';
 
 function App() {
-  const mode = useSelector((state) => state.mode);
-  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
   return (
-    <div className="app">
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/profile/:userId" element={<Profile />} />
-          </Routes>
-        </ThemeProvider>
-      </BrowserRouter>
-    </div>
+    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      <button onClick={toggleDarkMode}>
+        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      </button>
+      <div className="app">
+        <Home />
+      </div>
+    </ThemeProvider>
   );
 }
 
