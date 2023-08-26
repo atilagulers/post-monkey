@@ -1,27 +1,18 @@
 import {useState} from 'react';
-import {ThemeProvider} from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import {lightTheme, darkTheme} from './theme';
 
 // Pages
 import Home from './pages/Home';
 
-function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+// Components
+import Header from './components/Header/Header';
 
-  const toggleDarkMode = () => {
-    setIsDarkMode((prevMode) => !prevMode);
-  };
+function App() {
   return (
-    <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
-      <CssBaseline />
-      <button onClick={toggleDarkMode}>
-        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-      </button>
-      <div className="app">
-        <Home />
-      </div>
-    </ThemeProvider>
+    <div className="app">
+      <Header />
+
+      <Home />
+    </div>
   );
 }
 
