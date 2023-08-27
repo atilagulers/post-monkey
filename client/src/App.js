@@ -27,7 +27,7 @@ function App() {
         <Navbar />
       </header>
 
-      <main className="w-[50vw] bg-white dark:bg-dark">
+      <main className="w-[50vw] bg-white dark:bg-dark overflow-auto">
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />}></Route>
