@@ -1,8 +1,16 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import {useFormik} from 'formik';
 import './SignIn.css';
 
 function SignIn() {
+  const {values, handleChange, handleBlur} = useFormik({
+    initialValues: {
+      usernameOrEmail: '',
+      password: '',
+    },
+  });
+
   return (
     <div className="form-container w-[600px] mx-auto my-8 flex flex-col justify-center items-center">
       <div className="w-48 mb-5">
@@ -13,17 +21,23 @@ function SignIn() {
         <div className="mb-4">
           <input
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
             type="text"
+            id="usernameOrEmail"
             placeholder="Username or email"
+            value={values.usernameOrEmail}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
         </div>
         <div className="mb-6">
           <input
             className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
             type="password"
+            id="password"
             placeholder="password"
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
           />
           <p className="text-red-500 text-xs italic">
             Please choose a password.
@@ -32,7 +46,7 @@ function SignIn() {
         <div className="flex items-center justify-between">
           <button
             className="btn btn-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-            type="button"
+            type="submit"
           >
             Sign In
           </button>
