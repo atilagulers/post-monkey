@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import Home from './pages/Home';
 
 // Components
-import Header from './components/Header/Header';
+import Navbar from './components/Header/Navbar';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -22,7 +22,7 @@ function App() {
   };
   return (
     <div className="app bg-white dark:bg-black mx-auto mt-8">
-      <Header />
+      <Navbar />
 
       <Home />
       <button
