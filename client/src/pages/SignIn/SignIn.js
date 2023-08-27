@@ -17,7 +17,6 @@ function SignIn() {
     validationSchema: signUpSchema,
     onSubmit,
   });
-  console.log(errors);
 
   return (
     <div className="form-container w-[600px] mx-auto my-8 flex flex-col justify-center items-center">
