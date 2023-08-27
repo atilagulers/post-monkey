@@ -5,24 +5,30 @@ import {signUpSchema} from 'schemas';
 import './SignUp.css';
 
 function SignUp() {
-  const onSubmit = () => {
+  const onSubmit = async (values, actions) => {
     console.log('submitted');
+    actions.resetForm();
   };
 
-  const {values, errors, touched, handleChange, handleBlur, handleSubmit} =
-    useFormik({
-      initialValues: {
-        username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        birthday: new Date(),
-      },
-      validationSchema: signUpSchema,
-      onSubmit,
-    });
-  console.log(errors.email);
-
+  const {
+    values,
+    errors,
+    touched,
+    isSubmitting,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+  } = useFormik({
+    initialValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      birthday: new Date(),
+    },
+    validationSchema: signUpSchema,
+    onSubmit,
+  });
   return (
     <div className="form-container w-[600px] mx-auto my-8 flex flex-col justify-center items-center">
       <div className="w-48 mb-5">
@@ -127,6 +133,7 @@ function SignUp() {
           <button
             className="btn btn-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             type="submit"
+            disabled={isSubmitting}
           >
             Sign Up
           </button>
