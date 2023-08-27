@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 // Pages
 import Home from './pages/Home';
@@ -21,10 +22,19 @@ function App() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
   return (
-    <div className="app bg-white dark:bg-black mx-auto mt-8">
-      <Navbar />
+    <div className="app bg-white dark:bg-darkmx-auto flex">
+      <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
+        <Navbar />
+      </header>
 
-      <Home />
+      <main className="w-[50vw] bg-white dark:bg-dark">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+          </Routes>
+        </BrowserRouter>
+      </main>
+
       <button
         className="bg-black text-white dark:bg-white dark:text-black"
         onClick={handleThemeSwitch}

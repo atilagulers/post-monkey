@@ -12,3 +12,28 @@ body,
   width: 100%;
   font-family: 'Rubik', sans-serif;
 }
+
+@media (max-width: 768px) {
+  .app {
+    flex-direction: column;
+  }
+  header {
+    top: auto;
+    bottom: 0;
+    position: fixed;
+
+    height: 10%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: end;
+  }
+
+  main {
+    justify-content: center;
+    align-items: center;
+    width: 100vw !important;
+  }
+}
