@@ -31,6 +31,10 @@ body,
   @apply bg-orange-700 border-transparent text-white;
 }
 
+input:focus {
+  @apply border-2  border-blue-300;
+}
+
 @media (max-width: 768px) {
   .app {
     flex-direction: column;

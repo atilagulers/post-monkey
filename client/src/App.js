@@ -53,12 +53,12 @@ function App() {
         </BrowserRouter>
       </main>
 
-      <button
+      {/*<button
         className="bg-black text-white dark:bg-white dark:text-black"
         onClick={handleThemeSwitch}
       >
         SWITCH
-      </button>
+      </button>*/}
     </div>
   );
 }

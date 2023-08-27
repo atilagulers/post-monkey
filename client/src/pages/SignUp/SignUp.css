@@ -1,0 +1,4 @@
+.input-error,
+select.input-error {
+  @apply border-2 border-red-300;
+}
