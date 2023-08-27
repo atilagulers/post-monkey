@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 function Post() {
   return (
-    <div className="flex gap-3 border-y border-gray-300 dark:border-gray-700 dark:text-white p-2 shadow">
+    <div className="flex gap-3 border-b border-gray-300 dark:border-gray-700 dark:text-white p-2 shadow">
       <div>
         <img className="w-20" src="logo192.png" alt="" />
       </div>
