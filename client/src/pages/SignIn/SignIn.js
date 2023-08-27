@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {loginSchema} from 'schemas';
+import {signUpSchema} from 'schemas';
 import './SignIn.css';
 
 function SignIn() {
@@ -14,7 +14,7 @@ function SignIn() {
       usernameOrEmail: '',
       password: '',
     },
-    validationSchema: loginSchema,
+    validationSchema: signUpSchema,
     onSubmit,
   });
   console.log(errors);

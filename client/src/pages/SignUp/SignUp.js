@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
-import {loginSchema} from 'schemas';
+import {signUpSchema} from 'schemas';
 import './SignUp.css';
 
 function SignUp() {
@@ -14,8 +14,10 @@ function SignUp() {
       username: '',
       email: '',
       password: '',
+      confirmPassword: '',
+      birthday: null,
     },
-    validationSchema: loginSchema,
+    validationSchema: signUpSchema,
     onSubmit,
   });
   console.log(errors);
@@ -91,7 +93,7 @@ function SignUp() {
             className="btn btn-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
             type="submit"
           >
-            Sign In
+            Sign Up
           </button>
         </div>
         <Link
