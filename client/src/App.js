@@ -4,6 +4,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 // Pages
 import Home from 'pages/Home';
 import Auth from 'pages/Auth/Auth';
+import SignIn from 'pages/SignIn/SignIn';
 
 // Components
 import Navbar from 'components/Header/Navbar';
@@ -34,6 +35,8 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Auth />}></Route>
+            <Route path="/sign-in" element={<SignIn />}></Route>
+
             <Route
               path="/home/*"
               element={
