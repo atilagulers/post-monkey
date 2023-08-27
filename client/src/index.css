@@ -13,6 +13,24 @@ body,
   font-family: 'Rubik', sans-serif;
 }
 
+.btn {
+  @apply font-bold py-2 px-4 rounded;
+}
+.btn-orange {
+  @apply bg-orange-500 text-white;
+}
+.btn-orange:hover {
+  @apply bg-orange-700;
+}
+
+.btn-outline-orange {
+  @apply bg-transparent  text-orange-500 border border-orange-500;
+}
+
+.btn-outline-orange:hover {
+  @apply bg-orange-700 border-transparent text-white;
+}
+
 @media (max-width: 768px) {
   .app {
     flex-direction: column;

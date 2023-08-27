@@ -2,10 +2,11 @@ import {useState, useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 // Pages
-import Home from './pages/Home';
+import Home from 'pages/Home';
+import Auth from 'pages/Auth/Auth';
 
 // Components
-import Navbar from './components/Header/Navbar';
+import Navbar from 'components/Header/Navbar';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -23,14 +24,26 @@ function App() {
   };
   return (
     <div className="app bg-white dark:bg-darkmx-auto flex">
-      <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
-        <Navbar />
-      </header>
+      {false && (
+        <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
+          <Navbar />
+        </header>
+      )}
 
-      <main className="w-[50vw] bg-white dark:bg-dark overflow-auto">
+      <main className="w-[100%] bg-white dark:bg-dark overflow-auto">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />}></Route>
+            <Route path="/" element={<Auth />}></Route>
+            <Route
+              path="/home/*"
+              element={
+                <div className="w-[50vw]">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                  </Routes>
+                </div>
+              }
+            />
           </Routes>
         </BrowserRouter>
       </main>

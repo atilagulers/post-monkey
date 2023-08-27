@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 
 function Post() {
   return (
-    <div className="flex gap-3 border-b border-gray-300 dark:border-gray-700 dark:text-white p-2 shadow">
-      <div>
+    <section className="flex gap-3 border-b border-gray-300 dark:border-gray-700 dark:text-white p-2 shadow">
+      <div className="w-10 flex-none">
         <img className="w-20" src="logo192.png" alt="" />
       </div>
-      <div>
+      <article>
         <h2 className="text-xl mb-3">Atila Guler</h2>
         <p>
           Lorem ipsum dolor sit amet consectetur, adipisicing elit.
@@ -14,11 +14,9 @@ function Post() {
           praesentium possimus quos omnis quibusdam quidem vitae tenetur laborum
           voluptatibus nisi. Totam, pariatur?
         </p>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }
 
 export default Post;
-
-//article section

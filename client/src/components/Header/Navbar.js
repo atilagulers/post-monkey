@@ -16,7 +16,7 @@ function Navbar() {
   };
 
   return (
-    <div
+    <nav
       className={`navbar ${
         isOpen ? 'navbar-open' : ''
       } top-0 left-0 m-0 shadow-lg  bg-white dark:bg-dark`}
@@ -27,12 +27,12 @@ function Navbar() {
           </button>
         </div>*/}
 
-      <div className="navbar-list">
+      <div className="navbar-list flex">
         <h2 className="text-2xl text-black dark:text-white">this is sidebar</h2>
         <h2 className="text-2xl text-black dark:text-white">this is sidebar</h2>
         <h2 className="text-2xl text-black dark:text-white">this is sidebar</h2>
       </div>
-    </div>
+    </nav>
   );
 }
 

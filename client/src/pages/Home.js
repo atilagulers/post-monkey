@@ -4,7 +4,7 @@ import Post from '../components/Post/Post';
 function Home() {
   return (
     <PageWrapper title="Home">
-      <div className="">
+      <div>
         <Post />
         <Post />
         <Post />
