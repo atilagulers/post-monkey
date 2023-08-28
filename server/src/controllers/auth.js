@@ -54,7 +54,7 @@ export const login = async (req, res) => {
         {username: usernameOrEmail.toLowerCase()},
       ],
     });
-    console.log(user);
+
     if (!user) {
       throw new UnauthenticatedError('Invalid Credentials');
     }
@@ -71,7 +71,16 @@ export const login = async (req, res) => {
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.password;
 
+    //res.cookie('token', token, {
+    //  maxAge: expiresIn,
+    //  httpOnly: true,
+    //  secure: true,
+    //  sameSite: 'strict',
+    //});
+
     res.status(httpStatus.OK).json({token, user: userWithoutPassword});
+
+    //res.status(httpStatus.OK).json({token, user: userWithoutPassword});
   } catch (error) {
     res.status(httpStatus.UNAUTHORIZED).json({error: error.message});
   }
