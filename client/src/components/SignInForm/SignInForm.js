@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import './SignInForm.css';
-import {login} from 'services/api';
+import {loginUser} from 'services/api';
+import {useDispatch, useSelector} from 'react-redux';
+import {login} from 'features/user/authSlice';
 
 function SignInForm() {
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -12,7 +16,9 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {token, user} = await login({usernameOrEmail, password});
+      const {token, user} = await loginUser({usernameOrEmail, password});
+      dispatch(login());
+
       navigate('/home');
     } catch (err) {
       setError('Incorrect username-email or password');

@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import './Navbar.css';
 
 function Navbar() {
-  const {isAuthenticated} = useSelector((store) => store.user);
+  //const {isAuthenticated} = useSelector((store) => store.user);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,7 +20,7 @@ function Navbar() {
 
   return (
     <>
-      {isAuthenticated && (
+      {false && (
         <nav
           className={`navbar ${
             isOpen ? 'navbar-open' : ''

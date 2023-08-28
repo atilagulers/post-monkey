@@ -2,12 +2,12 @@ import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {signUpSchema} from 'schemas';
-import {register} from 'services/api';
+import {registerUser} from 'services/api';
 import './SignUp.css';
 
 function SignUp() {
   const onSubmit = async (values, actions) => {
-    await register(values);
+    await registerUser(values);
     actions.resetForm();
   };
 

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import './SignIn.css';
-import {useNavigate, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import SignInForm from 'components/SignInForm/SignInForm';
 
 function SignIn() {
