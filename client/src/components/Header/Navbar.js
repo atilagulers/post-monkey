@@ -1,8 +1,11 @@
 import {useState} from 'react';
 import {FaBars} from 'react-icons/fa';
+import {useSelector} from 'react-redux';
 import './Navbar.css';
 
 function Navbar() {
+  const {isAuthenticated} = useSelector((store) => store.user);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClickNavbar = () => {
@@ -17,7 +20,7 @@ function Navbar() {
 
   return (
     <>
-      {false && (
+      {isAuthenticated && (
         <nav
           className={`navbar ${
             isOpen ? 'navbar-open' : ''
