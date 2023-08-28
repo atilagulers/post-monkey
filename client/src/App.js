@@ -13,6 +13,9 @@ import SignUp from 'pages/SignUp/SignUp';
 // Components
 import Navbar from 'components/Header/Navbar';
 
+// Auth
+import PrivateRoute from 'components/PrivateRoute';
+
 function App() {
   const [theme, setTheme] = useState('light');
 
@@ -46,7 +49,14 @@ function App() {
                 element={
                   <div className="w-[50vw]">
                     <Routes>
-                      <Route path="/" element={<Home />} />
+                      <Route
+                        path="/"
+                        element={
+                          <PrivateRoute>
+                            <Home />
+                          </PrivateRoute>
+                        }
+                      />
                     </Routes>
                   </div>
                 }

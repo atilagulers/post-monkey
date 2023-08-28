@@ -62,11 +62,12 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      s;
       throw new UnauthenticatedError('Invalid Credentials');
     }
-
-    const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET);
+    const expiresIn = '30d';
+    const token = jwt.sign({userId: user._id}, process.env.JWT_SECRET, {
+      expiresIn,
+    });
     const userWithoutPassword = user.toObject();
     delete userWithoutPassword.password;
 

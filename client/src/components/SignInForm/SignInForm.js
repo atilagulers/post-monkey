@@ -3,9 +3,10 @@ import {Link, useNavigate} from 'react-router-dom';
 import './SignInForm.css';
 import {loginUser} from 'services/api';
 import {useDispatch, useSelector} from 'react-redux';
-import {login} from 'features/user/authSlice';
+import {login, setLoading} from 'features/user/authSlice';
 
 function SignInForm() {
+  const {isLoading} = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
@@ -16,12 +17,14 @@ function SignInForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      dispatch(setLoading(true));
       const {token, user} = await loginUser({usernameOrEmail, password});
-      dispatch(login());
-
+      dispatch(login({token, user}));
       navigate('/home');
     } catch (err) {
       setError('Incorrect username-email or password');
+    } finally {
+      dispatch(setLoading(false));
     }
   };
 
@@ -56,6 +59,7 @@ function SignInForm() {
         <button
           className="btn btn-orange text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
           type="submit"
+          disabled={isLoading}
         >
           Sign In
         </button>
@@ -66,7 +70,10 @@ function SignInForm() {
       </Link>
 
       <Divider />
-      <button className="btn btn-outline-orange bg-transparent w-full">
+      <button
+        className="btn btn-outline-orange bg-transparent w-full"
+        disabled={isLoading}
+      >
         Sign in with Google
       </button>
     </form>
