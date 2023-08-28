@@ -1,9 +1,15 @@
-import React, {useEffect, useState} from 'react';
 import './SignIn.css';
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import SignInForm from 'components/SignInForm/SignInForm';
+import {useSelector} from 'react-redux';
 
 function SignIn() {
+  const {token, user} = useSelector((store) => store.auth);
+
+  if (token && user) {
+    return <Navigate to="/home" />;
+  }
+
   return (
     <div className="auth flex justify-center items-center h-screen bg-zinc-200">
       <div className="logo-parent w-[500px]">
@@ -44,15 +50,5 @@ function SignIn() {
     </div>
   );
 }
-
-const Divider = () => {
-  return (
-    <div className="flex items-center gap-3 text-gray-500 w-80 mb-3">
-      <div className="border-t border-gray-500 flex-grow"></div>
-      <span>or</span>
-      <div className="border-t border-gray-500 flex-grow"></div>
-    </div>
-  );
-};
 
 export default SignIn;

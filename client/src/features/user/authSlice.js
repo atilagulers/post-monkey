@@ -19,15 +19,20 @@ const authSlice = createSlice({
     },
     login: (state, action) => {
       const {token, user} = action.payload;
-      state.isLoading = false;
       state.token = token;
       state.user = user;
       Cookies.set('token', token, {expires: 30});
       Cookies.set('user', JSON.stringify(user), {expires: 30});
     },
+    logout: (state) => {
+      state.token = '';
+      state.user = null;
+      Cookies.remove('token');
+      Cookies.remove('user');
+    },
   },
 });
 
-export const {login, setLoading} = authSlice.actions;
+export const {login, setLoading, logout} = authSlice.actions;
 
 export default authSlice.reducer;
