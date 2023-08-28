@@ -11,7 +11,7 @@ import SignIn from 'pages/SignIn/SignIn';
 import SignUp from 'pages/SignUp/SignUp';
 
 // Components
-import Navbar from 'components/Header/Navbar';
+import Navbar from 'components/Navbar/Navbar';
 
 // Auth
 import PrivateRoute from 'components/PrivateRoute';
