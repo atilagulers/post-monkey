@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './SignInForm.css';
 import {login} from 'services/api';
 
 function SignInForm() {
+  const navigate = useNavigate();
   const [usernameOrEmail, setUsernameOrEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -12,7 +13,7 @@ function SignInForm() {
     e.preventDefault();
     try {
       const {token, user} = await login({usernameOrEmail, password});
-      console.log(user);
+      navigate('/home');
     } catch (err) {
       setError('Incorrect username-email or password');
     }
