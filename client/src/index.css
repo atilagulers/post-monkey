@@ -39,6 +39,10 @@ button:disabled {
   opacity: 0.35;
 }
 
+.error-message {
+  @apply text-red-500;
+}
+
 @media (max-width: 768px) {
   .app {
     flex-direction: column;

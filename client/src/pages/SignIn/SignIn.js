@@ -1,11 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './SignIn.css';
 import {useNavigate, Link} from 'react-router-dom';
 import SignInForm from 'components/SignInForm/SignInForm';
 
 function SignIn() {
-  const navigate = useNavigate();
-
   return (
     <div className="auth flex justify-center items-center h-screen bg-zinc-200">
       <div className="logo-parent w-[500px]">

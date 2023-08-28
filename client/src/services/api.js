@@ -13,3 +13,13 @@ export const register = async (user) => {
     throw error;
   }
 };
+
+export const login = async (user) => {
+  try {
+    const response = await api.post('/auth/login', user);
+    return response.data;
+  } catch (error) {
+    console.error('Login error: ', error);
+    throw error;
+  }
+};

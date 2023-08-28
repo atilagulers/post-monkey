@@ -26,7 +26,7 @@ export const register = async (req, res, next) => {
     const createdUser = await User.create({
       username,
       email,
-      password,
+      password: passwordHashed,
       birthday,
       avatar,
       posts,
@@ -46,11 +46,15 @@ export const register = async (req, res, next) => {
  */
 export const login = async (req, res) => {
   try {
-    const {emailOrUsername, password} = req.body;
-    const user = await User.findOne({
-      $or: [{email: emailOrUsername}, {username: emailOrUsername}],
-    });
+    const {usernameOrEmail, password} = req.body;
 
+    const user = await User.findOne({
+      $or: [
+        {email: usernameOrEmail.toLowerCase()},
+        {username: usernameOrEmail.toLowerCase()},
+      ],
+    });
+    console.log(user);
     if (!user) {
       throw new UnauthenticatedError('Invalid Credentials');
     }
@@ -58,6 +62,7 @@ export const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
+      s;
       throw new UnauthenticatedError('Invalid Credentials');
     }
 

@@ -7,9 +7,7 @@ import './SignUp.css';
 
 function SignUp() {
   const onSubmit = async (values, actions) => {
-    console.log(values);
-    register(values);
-    console.log('submitted');
+    await register(values);
     actions.resetForm();
   };
 

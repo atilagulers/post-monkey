@@ -1,22 +1,22 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {useFormik} from 'formik';
-import {signUpSchema} from 'schemas';
 import './SignInForm.css';
+import {login} from 'services/api';
 
 function SignInForm() {
-  const onSubmit = () => {
-    console.log('submitted');
-  };
+  const [usernameOrEmail, setUsernameOrEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
-  const {values, errors, handleChange, handleBlur, handleSubmit} = useFormik({
-    initialValues: {
-      usernameOrEmail: '',
-      password: '',
-    },
-    validationSchema: signUpSchema,
-    onSubmit,
-  });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const {token, user} = await login({usernameOrEmail, password});
+      console.log(user);
+    } catch (err) {
+      setError('Incorrect username-email or password');
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="form">
@@ -26,22 +26,25 @@ function SignInForm() {
           type="text"
           id="usernameOrEmail"
           placeholder="Username or email"
-          value={values.usernameOrEmail}
-          onChange={handleChange}
-          onBlur={handleBlur}
+          value={usernameOrEmail}
+          onChange={(e) => setUsernameOrEmail(e.target.value)}
         />
       </div>
+
       <div className="mb-6">
         <input
-          className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-1 leading-tight focus:outline-none focus:shadow-outline"
           type="password"
           id="password"
           placeholder="Password"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
+        {error && (
+          <p className="error-message text-sm tracking-wide">{error}</p>
+        )}
       </div>
+
       <div className="flex items-center justify-between mb-1">
         <button
           className="btn btn-orange text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
