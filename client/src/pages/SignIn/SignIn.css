@@ -1,9 +1,25 @@
 @media (max-width: 768px) {
-  .form-container {
+  .auth {
+    flex-direction: column;
+    height: 100vh;
+    justify-content: start;
+  }
+
+  .logo-parent {
+    margin-top: 30px;
+    width: 60vw;
+  }
+
+  .logo {
+    margin-bottom: 30px;
     width: 100%;
   }
 
-  .form {
+  .button-container {
     width: 100%;
+  }
+
+  .header {
+    font-size: 46px;
   }
 }

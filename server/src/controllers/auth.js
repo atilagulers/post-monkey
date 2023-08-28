@@ -11,10 +11,10 @@ import jwt from 'jsonwebtoken';
 export const register = async (req, res, next) => {
   try {
     const {
-      fullName,
       username,
       email,
       password,
+      birthday,
       avatar,
       posts,
       friends,
@@ -24,10 +24,10 @@ export const register = async (req, res, next) => {
     const salt = await bcrypt.genSalt();
     const passwordHashed = await bcrypt.hash(password, salt);
     const createdUser = await User.create({
-      fullName,
       username,
       email,
-      password: passwordHashed,
+      password,
+      birthday,
       avatar,
       posts,
       friends,

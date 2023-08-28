@@ -1,75 +1,60 @@
 import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
-import {useFormik} from 'formik';
-import {signUpSchema} from 'schemas';
 import './SignIn.css';
+import {useNavigate, Link} from 'react-router-dom';
+import SignInForm from 'components/SignInForm/SignInForm';
 
 function SignIn() {
-  const onSubmit = () => {
-    console.log('submitted');
-  };
-
-  const {values, errors, handleChange, handleBlur, handleSubmit} = useFormik({
-    initialValues: {
-      usernameOrEmail: '',
-      password: '',
-    },
-    validationSchema: signUpSchema,
-    onSubmit,
-  });
+  const navigate = useNavigate();
 
   return (
-    <div className="form-container w-[600px] mx-auto my-8 flex flex-col justify-center items-center">
-      <div className="w-48 mb-5">
-        <img src="/images/monkey-logo.png" alt="" />
+    <div className="auth flex justify-center items-center h-screen bg-zinc-200">
+      <div className="logo-parent w-[500px]">
+        <img className="logo w-[400px]" src="/images/monkey-logo.png" alt="" />
       </div>
+      <div className="button-container w-[600px] h-[400px] flex flex-col justify-start items-center gap-3">
+        <div>
+          <h1 className="header text-7xl font-medium text-center mb-5">
+            POST MONKEY
+          </h1>
+        </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="form  rounded px-8 pt-6 pb-8 mb-4 w-[600px]"
-      >
-        <div className="mb-4">
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            type="text"
-            id="usernameOrEmail"
-            placeholder="Username or email"
-            value={values.usernameOrEmail}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+        <div className="form container w-[400px]">
+          <div className="w-full">
+            <div className="flex justify-center mb-8 ">
+              <p className="inline-block align-baseline  text-sm font-light tracking-wider">
+                Don't have an account?{' '}
+                <Link
+                  className="inline-block align-baseline  text-sm text-orange-600 hover:text-orange-800 font-light"
+                  to={'/sign-up'}
+                >
+                  Sign Up
+                </Link>
+              </p>
+            </div>
+
+            <SignInForm />
+
+            {/*<button
+              onClick={() => navigate('/sign-in')}
+              className="btn btn-outline-orange bg-transparent w-80"
+            >
+              Sign in
+            </button>*/}
+          </div>
         </div>
-        <div className="mb-6">
-          <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            type="password"
-            id="password"
-            placeholder="password"
-            value={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <p className="text-red-500 text-xs italic">
-            Please choose a password.
-          </p>
-        </div>
-        <div className="flex items-center justify-between mb-3">
-          <button
-            className="btn btn-orange text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
-            type="submit"
-          >
-            Sign In
-          </button>
-        </div>
-        <Link
-          className="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-800"
-          href="#"
-        >
-          Forgot Password?
-        </Link>
-      </form>
+      </div>
     </div>
   );
 }
+
+const Divider = () => {
+  return (
+    <div className="flex items-center gap-3 text-gray-500 w-80 mb-3">
+      <div className="border-t border-gray-500 flex-grow"></div>
+      <span>or</span>
+      <div className="border-t border-gray-500 flex-grow"></div>
+    </div>
+  );
+};
 
 export default SignIn;

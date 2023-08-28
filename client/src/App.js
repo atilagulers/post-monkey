@@ -3,7 +3,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 // Pages
 import Home from 'pages/Home';
-import Auth from 'pages/Auth/Auth';
 import SignIn from 'pages/SignIn/SignIn';
 import SignUp from 'pages/SignUp/SignUp';
 
@@ -35,8 +34,8 @@ function App() {
       <main className="w-[100%] bg-white dark:bg-dark overflow-auto">
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Auth />}></Route>
-            <Route path="/sign-in" element={<SignIn />}></Route>
+            <Route path="/" element={<SignIn />}></Route>
+
             <Route path="/sign-up" element={<SignUp />}></Route>
 
             <Route

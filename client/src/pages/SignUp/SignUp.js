@@ -2,10 +2,13 @@ import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {signUpSchema} from 'schemas';
+import {register} from 'services/api';
 import './SignUp.css';
 
 function SignUp() {
   const onSubmit = async (values, actions) => {
+    console.log(values);
+    register(values);
     console.log('submitted');
     actions.resetForm();
   };
@@ -140,7 +143,7 @@ function SignUp() {
         </div>
         <Link
           className="inline-block align-baseline font-bold text-sm text-orange-500 hover:text-orange-800"
-          href="#"
+          to={'/'}
         >
           Already have account?
         </Link>
