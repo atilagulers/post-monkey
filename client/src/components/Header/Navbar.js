@@ -16,23 +16,33 @@ function Navbar() {
   };
 
   return (
-    <nav
-      className={`navbar ${
-        isOpen ? 'navbar-open' : ''
-      } top-0 left-0 m-0 shadow-lg  bg-white dark:bg-dark`}
-    >
-      {/*<div className="flex justify-center items-center ">
+    <>
+      {false && (
+        <nav
+          className={`navbar ${
+            isOpen ? 'navbar-open' : ''
+          } top-0 left-0 m-0 shadow-lg  bg-white dark:bg-dark`}
+        >
+          {/*<div className="flex justify-center items-center ">
           <button onClick={handleClickNavbar}>
             <FaBars size={32} />
           </button>
         </div>*/}
 
-      <div className="navbar-list flex">
-        <h2 className="text-2xl text-black dark:text-white">this is sidebar</h2>
-        <h2 className="text-2xl text-black dark:text-white">this is sidebar</h2>
-        <h2 className="text-2xl text-black dark:text-white">this is sidebar</h2>
-      </div>
-    </nav>
+          <div className="navbar-list flex">
+            <h2 className="text-2xl text-black dark:text-white">
+              this is sidebar
+            </h2>
+            <h2 className="text-2xl text-black dark:text-white">
+              this is sidebar
+            </h2>
+            <h2 className="text-2xl text-black dark:text-white">
+              this is sidebar
+            </h2>
+          </div>
+        </nav>
+      )}
+    </>
   );
 }
 

@@ -1,6 +1,10 @@
 import {useState, useEffect} from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
+// Redux
+import {store} from 'store';
+import {Provider} from 'react-redux';
+
 // Pages
 import Home from 'pages/Home';
 import SignIn from 'pages/SignIn/SignIn';
@@ -24,41 +28,41 @@ function App() {
     setTheme(theme === 'dark' ? 'light' : 'dark');
   };
   return (
-    <div className="app bg-white dark:bg-darkmx-auto flex">
-      {false && (
+    <Provider store={store}>
+      <div className="app bg-white dark:bg-darkmx-auto flex">
         <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
           <Navbar />
         </header>
-      )}
 
-      <main className="w-[100%] bg-white dark:bg-dark overflow-auto">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<SignIn />}></Route>
+        <main className="w-[100%] bg-white dark:bg-dark overflow-auto">
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<SignIn />}></Route>
 
-            <Route path="/sign-up" element={<SignUp />}></Route>
+              <Route path="/sign-up" element={<SignUp />}></Route>
 
-            <Route
-              path="/home/*"
-              element={
-                <div className="w-[50vw]">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                  </Routes>
-                </div>
-              }
-            />
-          </Routes>
-        </BrowserRouter>
-      </main>
+              <Route
+                path="/home/*"
+                element={
+                  <div className="w-[50vw]">
+                    <Routes>
+                      <Route path="/" element={<Home />} />
+                    </Routes>
+                  </div>
+                }
+              />
+            </Routes>
+          </BrowserRouter>
+        </main>
 
-      {/*<button
+        {/*<button
         className="bg-black text-white dark:bg-white dark:text-black"
         onClick={handleThemeSwitch}
       >
         SWITCH
       </button>*/}
-    </div>
+      </div>
+    </Provider>
   );
 }
 
