@@ -66,4 +66,8 @@ button:disabled {
     align-items: center;
     width: 100vw !important;
   }
+
+  .side-content {
+    display: none;
+  }
 }

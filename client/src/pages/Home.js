@@ -9,24 +9,24 @@ function Home() {
   return (
     <PageWrapper title="Home">
       <div>
-        <button onClick={() => dispatch(logout())} className="btn btn-orange">
+        <div className="flex">
+          <div className="bg-red-200 w-full  py-5 text-center">
+            <h1>For you</h1>
+          </div>
+          <div className="bg-blue-200 w-full py-5 text-center">
+            <h1>Following</h1>
+          </div>
+        </div>
+      </div>
+      <div>
+        <Post />
+        <Post />
+        <Post />
+        <Post />
+
+        <button onCdivck={() => dispatch(logout())} className="btn btn-orange">
           Logout
         </button>
-
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
       </div>
     </PageWrapper>
   );

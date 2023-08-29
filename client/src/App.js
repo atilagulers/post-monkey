@@ -7,6 +7,7 @@ import {Provider} from 'react-redux';
 
 // Pages
 import Home from 'pages/Home';
+import Profile from 'pages/Profile/Profile';
 import SignIn from 'pages/SignIn/SignIn';
 import SignUp from 'pages/SignUp/SignUp';
 
@@ -37,32 +38,42 @@ function App() {
           <Navbar />
         </header>
 
-        <main className="w-[100%] bg-white dark:bg-dark overflow-auto">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<SignIn />}></Route>
+        <main className="w-[100%] bg-white dark:bg-dark overflow-auto flex">
+          <div>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<SignIn />}></Route>
 
-              <Route path="/sign-up" element={<SignUp />}></Route>
+                <Route path="/sign-up" element={<SignUp />}></Route>
 
-              <Route
-                path="/home/*"
-                element={
-                  <div className="w-[50vw]">
-                    <Routes>
-                      <Route
-                        path="/"
-                        element={
-                          <PrivateRoute>
-                            <Home />
-                          </PrivateRoute>
-                        }
-                      />
-                    </Routes>
-                  </div>
-                }
-              />
-            </Routes>
-          </BrowserRouter>
+                <Route
+                  path="/home"
+                  element={
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  }
+                />
+
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute>
+                      <Profile />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+            </BrowserRouter>
+          </div>
+          <div className="side-content w-full p-5">
+            <div className="w-[250px]">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
+              perferendis animi illo deserunt incidunt blanditiis excepturi
+              vitae eius. Sed necessitatibus ipsa ex. Eaque quas pariatur omnis
+              nobis quo maiores magni.
+            </div>
+          </div>
         </main>
 
         {/*<button
