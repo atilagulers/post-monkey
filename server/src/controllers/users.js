@@ -5,7 +5,7 @@ import User from '../models/User.js';
  * View User Details.
  * @GET /users/:username
  */
-export const getUser = async (req, res) => {
+export const getUserByUsername = async (req, res) => {
   try {
     const {username} = req.params;
     const user = await User.find({username});

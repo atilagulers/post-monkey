@@ -1,22 +1,20 @@
 import express from 'express';
 
 import {
-  getUser,
+  getUserByUsername,
   getUserFriends,
   addRemoveFriend,
+  updateUser,
 } from '../controllers/users.js';
 
 const router = express.Router();
 
-// Get user by username
-router.get('/:username', getUser);
+router.get('/:username', getUserByUsername);
 
-// Update user by user id
-router.patch('/:userId', getUser);
+router.patch('/:userId', updateUser);
 
 router.get('/id/friends', getUserFriends);
 
-//* UPDATE
 router.patch('/:id/:friendId', addRemoveFriend);
 
 export default router;
