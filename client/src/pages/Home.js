@@ -7,7 +7,6 @@ import {selectTab} from 'features/tab/tabSlice';
 function Home() {
   const dispatch = useDispatch();
   const {currentTab} = useSelector((store) => store.tab.home);
-
   const handleClickTab = (tabIndex) => {
     dispatch(selectTab({section: 'home', tabIndex}));
   };

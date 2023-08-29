@@ -30,18 +30,18 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: '/avatars/default-avatar.jpg',
     },
-    posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
-    friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
-    friendRequests: [
-      {
-        sender: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-        status: {
-          type: String,
-          enum: ['pending', 'accepted', 'rejected'],
-          default: 'pending',
-        },
-      },
-    ],
+    //posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
+    //friends: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}],
+    //friendRequests: [
+    //  {
+    //    sender: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
+    //    status: {
+    //      type: String,
+    //      enum: ['pending', 'accepted', 'rejected'],
+    //      default: 'pending',
+    //    },
+    //  },
+    //],
   },
   {timestamps: true}
 );

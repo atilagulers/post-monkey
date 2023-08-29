@@ -34,13 +34,13 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div className="app bg-white dark:bg-darkmx-auto flex">
+        <div className="app bg-white dark:bg-dark mx-auto flex">
           <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
             <Navbar />
           </header>
 
-          <main className="w-[100%] bg-white dark:bg-dark overflow-auto flex">
-            <div>
+          <main className="w-full bg-white dark:bg-dark overflow-auto flex">
+            <div className="page w-[500px]">
               <Routes>
                 <Route path="/" element={<SignIn />}></Route>
 

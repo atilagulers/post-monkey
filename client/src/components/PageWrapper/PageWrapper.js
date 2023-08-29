@@ -6,7 +6,7 @@ function PageWrapper({title, children}) {
     window.scrollTo(0, 0);
   }, [title]);
 
-  return <div className="mx-auto">{children}</div>;
+  return <div className="">{children}</div>;
 }
 
 export default PageWrapper;

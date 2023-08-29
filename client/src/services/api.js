@@ -1,8 +1,26 @@
 import axios from 'axios';
+import {store} from '../store.js';
 
 const api = axios.create({
   baseURL: process.env.REACT_APP_API,
 });
+
+api.interceptors.request.use(
+  (config) => {
+    const {token} = store.getState()?.auth;
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
+// Auth
 
 export const registerUser = async (user) => {
   try {
@@ -19,6 +37,19 @@ export const loginUser = async (user) => {
   try {
     const response = await api.post('/auth/login', user);
 
+    return response.data;
+  } catch (error) {
+    console.error('Login error: ', error);
+    throw error;
+  }
+};
+
+// Post
+
+export const getPostsByUsername = async (username) => {
+  try {
+    const response = await api.get(`/posts/${username}`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error('Login error: ', error);
