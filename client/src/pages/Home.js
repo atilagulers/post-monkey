@@ -9,12 +9,12 @@ function Home() {
   return (
     <PageWrapper title="Home">
       <div>
-        <div className="flex">
-          <div className="bg-red-200 w-full  py-5 text-center">
-            <h1>For you</h1>
+        <div className="flex items-end">
+          <div className="w-full py-3 text-center flex justify-center hover:bg-stone-200">
+            <h1 className="border-b-2 border-b-orange-500 w-fit">For you</h1>
           </div>
-          <div className="bg-blue-200 w-full py-5 text-center">
-            <h1>Following</h1>
+          <div className="w-full py-3 text-center flex justify-center  hover:bg-stone-200">
+            <h1 className="border-b-2 border-b-orange-500 w-fit">Following</h1>
           </div>
         </div>
       </div>
