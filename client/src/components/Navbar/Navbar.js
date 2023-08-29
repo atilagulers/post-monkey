@@ -1,8 +1,8 @@
 import React from 'react';
-import {FaHome, FaBell} from 'react-icons/fa';
-
+import {FaHome, FaBell, FaUser} from 'react-icons/fa';
 import {useSelector} from 'react-redux';
 import './Navbar.css';
+import {useNavigate} from 'react-router-dom';
 
 function Navbar() {
   const {token} = useSelector((store) => store.auth);
@@ -15,10 +15,14 @@ function Navbar() {
         >
           <div className="navbar-list flex  h-full">
             {/* Dinamik NavbarItem kullanımı */}
-            <NavbarItem Icon={FaHome} text="Home" />
-            <NavbarItem Icon={FaBell} text="Notifications" />
-            <NavbarItem Icon={FaBell} text="Messages" />
-            <NavbarItem Icon={FaBell} text="Profile" />
+            <NavbarItem Icon={FaHome} text="Home" page={'home'} />
+            <NavbarItem
+              Icon={FaBell}
+              text="Notifications"
+              page={'notifications'}
+            />
+            <NavbarItem Icon={FaBell} text="Messages" page={'messages'} />
+            <NavbarItem Icon={FaUser} text="Profile" page={'profile'} />
 
             {/* İhtiyaca göre diğer NavbarItem bileşenleri */}
           </div>
@@ -28,9 +32,13 @@ function Navbar() {
   );
 }
 
-const NavbarItem = ({Icon, text}) => {
+const NavbarItem = ({Icon, text, page}) => {
+  const navigate = useNavigate();
   return (
-    <div className="navbar-item flex items-center mb-3 ">
+    <div
+      onClick={() => navigate(`/${page}`)}
+      className="navbar-item flex items-center mb-3"
+    >
       <div className="navbar-item-content flex justify-start items-center gap-5 px-5 py-3 rounded-full hover:hover:bg-gray-200">
         {Icon && <Icon size={28} className="" />}
         <h2 className="navbar-item-text text-xl text-black dark:text-white font-light">
@@ -42,11 +50,3 @@ const NavbarItem = ({Icon, text}) => {
 };
 
 export default Navbar;
-
-{
-  /*<div className="flex justify-center items-center ">
-          <button onClick={handleClickNavbar}>
-            <FaBars size={32} />
-          </button>
-        </div>*/
-}

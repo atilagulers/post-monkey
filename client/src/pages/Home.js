@@ -1,21 +1,33 @@
 import PageWrapper from '../components/PageWrapper/PageWrapper';
 import Post from '../components/Post/Post';
-import {useDispatch} from 'react-redux';
-import {logout} from 'features/user/authSlice';
+import {logout} from 'features/auth/authSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {selectTab} from 'features/tab/tabSlice';
 
 function Home() {
   const dispatch = useDispatch();
+  const {currentTab} = useSelector((store) => store.tab.home);
+
+  const handleClickTab = (tabIndex) => {
+    dispatch(selectTab({section: 'home', tabIndex}));
+  };
 
   return (
     <PageWrapper title="Home">
       <div>
-        <div className="flex items-end">
-          <div className="w-full py-3 text-center flex justify-center hover:bg-stone-200">
-            <h1 className="border-b-2 border-b-orange-500 w-fit">For you</h1>
-          </div>
-          <div className="w-full py-3 text-center flex justify-center  hover:bg-stone-200">
-            <h1 className="border-b-2 border-b-orange-500 w-fit">Following</h1>
-          </div>
+        <div className="flex items-end border-b-2 border-r-2">
+          <Tab
+            handleClick={handleClickTab}
+            text={'For you'}
+            tabIndex={0}
+            currentTab={currentTab}
+          />
+          <Tab
+            handleClick={handleClickTab}
+            text={'Following'}
+            tabIndex={1}
+            currentTab={currentTab}
+          />
         </div>
       </div>
       <div>
@@ -24,7 +36,7 @@ function Home() {
         <Post />
         <Post />
 
-        <button onCdivck={() => dispatch(logout())} className="btn btn-orange">
+        <button onClick={() => dispatch(logout())} className="btn btn-orange">
           Logout
         </button>
       </div>
@@ -33,3 +45,20 @@ function Home() {
 }
 
 export default Home;
+
+const Tab = ({handleClick, text, tabIndex, currentTab}) => {
+  return (
+    <div
+      onClick={() => handleClick(tabIndex)}
+      className="w-full py-3 text-center flex justify-center hover:bg-stone-200"
+    >
+      <h1
+        className={`${
+          tabIndex === currentTab ? 'border-b-2 border-b-orange-500' : ''
+        }`}
+      >
+        {text}
+      </h1>
+    </div>
+  );
+};

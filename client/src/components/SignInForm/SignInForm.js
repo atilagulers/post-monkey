@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import './SignInForm.css';
 import {loginUser} from 'services/api';
 import {useDispatch, useSelector} from 'react-redux';
-import {login, setLoading} from 'features/user/authSlice';
+import {login, setLoading} from 'features/auth/authSlice';
 
 function SignInForm() {
   const {isLoading} = useSelector((store) => store.auth);

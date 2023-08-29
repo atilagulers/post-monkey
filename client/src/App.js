@@ -33,14 +33,14 @@ function App() {
   };
   return (
     <Provider store={store}>
-      <div className="app bg-white dark:bg-darkmx-auto flex">
-        <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
-          <Navbar />
-        </header>
+      <BrowserRouter>
+        <div className="app bg-white dark:bg-darkmx-auto flex">
+          <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
+            <Navbar />
+          </header>
 
-        <main className="w-[100%] bg-white dark:bg-dark overflow-auto flex">
-          <div>
-            <BrowserRouter>
+          <main className="w-[100%] bg-white dark:bg-dark overflow-auto flex">
+            <div>
               <Routes>
                 <Route path="/" element={<SignIn />}></Route>
 
@@ -64,25 +64,25 @@ function App() {
                   }
                 />
               </Routes>
-            </BrowserRouter>
-          </div>
-          <div className="side-content w-full p-5">
-            <div className="w-[250px]">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
-              perferendis animi illo deserunt incidunt blanditiis excepturi
-              vitae eius. Sed necessitatibus ipsa ex. Eaque quas pariatur omnis
-              nobis quo maiores magni.
             </div>
-          </div>
-        </main>
+            <div className="side-content w-full p-5">
+              <div className="w-[250px]">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
+                perferendis animi illo deserunt incidunt blanditiis excepturi
+                vitae eius. Sed necessitatibus ipsa ex. Eaque quas pariatur
+                omnis nobis quo maiores magni.
+              </div>
+            </div>
+          </main>
 
-        {/*<button
+          {/*<button
         className="bg-black text-white dark:bg-white dark:text-black"
         onClick={handleThemeSwitch}
       >
         SWITCH
       </button>*/}
-      </div>
+        </div>
+      </BrowserRouter>
     </Provider>
   );
 }

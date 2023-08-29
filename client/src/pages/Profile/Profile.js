@@ -1,10 +1,13 @@
 import React, {useEffect} from 'react';
 import PageWrapper from 'components/PageWrapper/PageWrapper';
+import Post from 'components/Post/Post';
 
 function Profile() {
   return (
     <PageWrapper title="Profile">
-      <h1>Profile</h1>
+      <Post />
+      <Post />
+      <Post />
     </PageWrapper>
   );
 }
