@@ -1,5 +1,4 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {tab} from '@testing-library/user-event/dist/tab';
 
 const homeTabs = {forYou: 0, following: 1};
 

@@ -40,7 +40,7 @@ function App() {
           </header>
 
           <main className="w-full bg-white dark:bg-dark overflow-auto flex">
-            <div className="page w-[500px]">
+            <div className="page w-[1200px]">
               <Routes>
                 <Route path="/" element={<SignIn />}></Route>
 

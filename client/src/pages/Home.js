@@ -2,11 +2,11 @@ import PageWrapper from '../components/PageWrapper/PageWrapper';
 import Post from '../components/Post/Post';
 import {logout} from 'features/auth/authSlice';
 import {useDispatch, useSelector} from 'react-redux';
-import {selectTab} from 'features/tab/tabSlice';
+import {selectTab} from 'features/tabs/tabSlice';
 
 function Home() {
   const dispatch = useDispatch();
-  const {currentTab} = useSelector((store) => store.tab.home);
+  const {currentTab} = useSelector((store) => store.tabs.home);
   const handleClickTab = (tabIndex) => {
     dispatch(selectTab({section: 'home', tabIndex}));
   };
