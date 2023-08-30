@@ -36,23 +36,23 @@ export const registerUser = async (user) => {
 export const loginUser = async (user) => {
   try {
     const response = await api.post('/auth/login', user);
-
     return response.data;
   } catch (error) {
-    console.error('Login error: ', error);
     throw error;
   }
 };
 
 // Post
 
-export const getPostsByUsername = async (username) => {
+export const fetchPostsByUserID = async (username) => {
   try {
     const response = await api.get(`/posts/${username}`);
-    console.log(response.data);
+
     return response.data;
   } catch (error) {
     console.error('Login error: ', error);
     throw error;
   }
 };
+
+export default api;
