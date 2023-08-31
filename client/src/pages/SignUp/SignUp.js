@@ -1,17 +1,31 @@
-import React, {useEffect} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useEffect, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
 import {useFormik} from 'formik';
 import {signUpSchema} from 'schemas';
 import {registerUser} from 'services/api';
 import './SignUp.css';
 import {useTheme} from 'contexts/themeContext';
+import {toast} from 'react-toastify';
 
 function SignUp() {
+  const navigate = useNavigate();
   const {isDark} = useTheme();
+  const [conflictField, setConflictField] = useState('');
 
   const onSubmit = async (values, actions) => {
-    await registerUser(values);
-    actions.resetForm();
+    try {
+      await registerUser(values);
+      actions.resetForm();
+      toast.success('Account successfully created.');
+      navigate('/');
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        const {conflictField} = error.response.data;
+        setConflictField(conflictField);
+      } else {
+        toast.success('Network error.');
+      }
+    }
   };
 
   const {
@@ -55,11 +69,17 @@ function SignUp() {
             onChange={handleChange}
             onBlur={handleBlur}
           />
+
           <ErrorMessage
             errors={errors}
             touched={touched}
             fieldName="username"
           />
+          {conflictField === 'username' && (
+            <p className="error-message text-sm tracking-wide">
+              {`Username already exist.`}
+            </p>
+          )}
         </div>
         <div className="mb-4">
           <input
@@ -74,6 +94,11 @@ function SignUp() {
             onBlur={handleBlur}
           />
           <ErrorMessage errors={errors} touched={touched} fieldName="email" />
+          {conflictField === 'email' && (
+            <p className="error-message text-sm tracking-wide">
+              {`Email already exist.`}
+            </p>
+          )}
         </div>
 
         <div className="mb-4">

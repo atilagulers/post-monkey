@@ -20,60 +20,76 @@ import {useSelector} from 'react-redux';
 import PrivateRoute from 'components/PrivateRoute';
 
 // Context
-import {ThemeProvider} from 'contexts/themeContext';
+import {useTheme} from 'contexts/themeContext';
+
+import {ToastContainer, Slide} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
+  const {isDark} = useTheme();
+
   return (
     <Provider store={store}>
-      <ThemeProvider>
-        <BrowserRouter>
-          <div
-            className="app bg-white dark:bg-dark mx-auto flex"
-            style={{backgroundColor: 'white'}}
-          >
-            <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
-              <Navbar />
-            </header>
+      <BrowserRouter>
+        <div
+          className="app bg-white dark:bg-dark mx-auto flex"
+          style={{backgroundColor: 'white'}}
+        >
+          <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
+            <Navbar />
+          </header>
 
-            <main className="w-full bg-white dark:bg-dark overflow-auto flex">
-              <div className="page w-full">
-                <TopLogo />
-                <Routes>
-                  <Route path="/" element={<SignIn />}></Route>
+          <main className="w-full bg-white dark:bg-dark overflow-auto flex">
+            <div className="page w-full">
+              <TopLogo />
+              <Routes>
+                <Route path="/" element={<SignIn />}></Route>
 
-                  <Route path="/sign-up" element={<SignUp />}></Route>
+                <Route path="/sign-up" element={<SignUp />}></Route>
 
-                  <Route
-                    path="/home"
-                    element={
-                      <PrivateRoute>
-                        <Home />
-                      </PrivateRoute>
-                    }
-                  />
+                <Route
+                  path="/home"
+                  element={
+                    <PrivateRoute>
+                      <Home />
+                    </PrivateRoute>
+                  }
+                />
 
-                  <Route
-                    path="/profile"
-                    element={
-                      <PrivateRoute>
-                        <Profile />
-                      </PrivateRoute>
-                    }
-                  />
-                </Routes>
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute>
+                      <Profile />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+            </div>
+            <div className="side-content w-full p-5 border-l border-gray-300 dark:border-gray-700 shadow">
+              <div className="w-[250px]">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
+                perferendis animi illo deserunt incidunt blanditiis excepturi
+                vitae eius. Sed necessitatibus ipsa ex. Eaque quas pariatur
+                omnis nobis quo maiores magni.
               </div>
-              <div className="side-content w-full p-5 border-l border-gray-300 dark:border-gray-700 shadow">
-                {/*<div className="w-[250px]">
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Omnis perferendis animi illo deserunt incidunt blanditiis
-                  excepturi vitae eius. Sed necessitatibus ipsa ex. Eaque quas
-                  pariatur omnis nobis quo maiores magni.
-                </div>*/}
-              </div>
-            </main>
-          </div>
-        </BrowserRouter>
-      </ThemeProvider>
+            </div>
+          </main>
+        </div>
+      </BrowserRouter>
+      <ToastContainer
+        position="top-center"
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        pauseOnHover={false}
+        theme={isDark ? 'light' : 'dark'}
+        autoClose={1500}
+        transition={Slide}
+      />
     </Provider>
   );
 }
