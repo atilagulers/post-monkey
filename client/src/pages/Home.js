@@ -3,7 +3,7 @@ import Post from '../components/Post/Post';
 import {logout} from 'features/auth/authSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectTab} from 'features/tabs/tabSlice';
-import PostForm from 'components/PostForm/PostForm';
+import CreatePostForm from 'components/CreatePostForm/CreatePostForm';
 
 function Home() {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ function Home() {
   return (
     <PageWrapper title="Home">
       <div>
-        <div className="flex items-end border-b-2 border-r-2">
+        <div className="flex items-end">
           <Tab
             handleClick={handleClickTab}
             text={'For you'}
@@ -31,7 +31,7 @@ function Home() {
         </div>
       </div>
       <div>
-        <PostForm />
+        <CreatePostForm />
         <Post />
         <Post />
         <Post />
@@ -51,7 +51,7 @@ const Tab = ({handleClick, text, tabIndex, currentTab}) => {
   return (
     <div
       onClick={() => handleClick(tabIndex)}
-      className="w-full py-3 text-center flex justify-center hover:bg-stone-200"
+      className="w-full py-3 text-center flex justify-center hover:bg-stone-200 dark:hover:bg-stone-900 dark:text-white"
     >
       <h1
         className={`${

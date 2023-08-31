@@ -32,7 +32,7 @@ function App() {
 
             <main className="w-full bg-white dark:bg-dark overflow-auto flex">
               <div className="page w-[1200px]">
-                <div className="flex justify-center">
+                <div className="flex justify-center my-6">
                   <div className="w-16">
                     <img src="/images/logo-black.png" alt="" />
                   </div>
