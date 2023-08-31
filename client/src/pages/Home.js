@@ -3,6 +3,7 @@ import Post from '../components/Post/Post';
 import {logout} from 'features/auth/authSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {selectTab} from 'features/tabs/tabSlice';
+import PostForm from 'components/PostForm/PostForm';
 
 function Home() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function Home() {
         </div>
       </div>
       <div>
+        <PostForm />
         <Post />
         <Post />
         <Post />

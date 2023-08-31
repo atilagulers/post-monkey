@@ -9,7 +9,7 @@ export const getPostsByUserId = async (req, res, next) => {
   try {
     const {userId} = req.params;
 
-    const posts = await Post.find({user: userId});
+    const posts = await Post.find({user: userId}).sort({createdAt: -1});
     console.log(posts);
 
     res.status(httpStatus.OK).json(posts);

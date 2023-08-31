@@ -33,7 +33,7 @@ function SignUp() {
   return (
     <div className="form-container w-[600px] mx-auto my-8 flex flex-col justify-center items-center">
       <div className="w-48 mb-5">
-        <img src="/images/monkey-logo.png" alt="" />
+        <img src="/images/logo-black.png" alt="" />
       </div>
 
       <form

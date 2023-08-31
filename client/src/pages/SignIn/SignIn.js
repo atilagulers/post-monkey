@@ -13,7 +13,7 @@ function SignIn() {
   return (
     <div className="auth flex justify-center items-center h-screen bg-zinc-100">
       <div className="logo-parent w-[500px]">
-        <img className="logo w-[400px]" src="/images/monkey-logo.png" alt="" />
+        <img className="logo w-[400px]" src="/images/logo-black.png" alt="" />
       </div>
       <div className="button-container w-[600px] h-[400px] flex flex-col justify-start items-center gap-3">
         <div>
