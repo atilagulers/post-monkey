@@ -31,10 +31,7 @@ function App() {
             className="app bg-white dark:bg-dark mx-auto flex"
             style={{backgroundColor: 'white'}}
           >
-            <header
-              className="border-r border-gray-300 dark:border-gray-700  bg-dark"
-              k
-            >
+            <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
               <Navbar />
             </header>
 

@@ -5,6 +5,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {setProfilePosts} from 'features/posts/postSlice';
 import {fetchProfilePosts} from 'features/posts/postSlice';
 import LoadingSpinner from 'components/Common/LoadingSpinner';
+import CreatePostForm from 'components/CreatePostForm/CreatePostForm';
 
 function Profile() {
   const {user} = useSelector((store) => store.auth);
@@ -23,6 +24,7 @@ function Profile() {
 
   return (
     <PageWrapper title="Profile">
+      <CreatePostForm />
       {profilePosts.map((post) => (
         <Post content={post.content} key={post._id} />
       ))}

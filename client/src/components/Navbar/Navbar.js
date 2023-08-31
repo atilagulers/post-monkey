@@ -24,7 +24,6 @@ function Navbar() {
               page={'notifications'}
             />
             <NavbarItem Icon={FaBell} text="Messages" page={'messages'} />
-            <NavbarItem Icon={FaUser} text="Profile" page={'profile'} />
 
             <div
               onClick={toggleTheme}
@@ -40,6 +39,7 @@ function Navbar() {
                 </h2>
               </div>
             </div>
+            <NavbarItem Icon={FaUser} text="Profile" page={'profile'} />
           </div>
         </nav>
       )}

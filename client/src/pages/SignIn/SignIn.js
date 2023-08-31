@@ -17,7 +17,9 @@ function SignIn() {
       <div className="logo-parent w-[500px]">
         <img
           className="logo w-[400px]"
-          src={`/images/logo-${isDark ? 'white' : 'black'}.png`}
+          src={`${
+            isDark ? '/images/logo-white.png' : '/images/logo-black.png'
+          }`}
           alt=""
         />
       </div>
