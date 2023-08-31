@@ -2,18 +2,24 @@ import './SignIn.css';
 import {Link, Navigate} from 'react-router-dom';
 import SignInForm from 'components/SignInForm/SignInForm';
 import {useSelector} from 'react-redux';
+import {useTheme} from 'contexts/themeContext';
 
 function SignIn() {
   const {token, user} = useSelector((store) => store.auth);
+  const {isDark} = useTheme();
 
   if (token && user) {
     return <Navigate to="/home" />;
   }
 
   return (
-    <div className="auth flex justify-center items-center h-screen bg-zinc-100">
+    <div className="auth flex justify-center items-center h-screen bg-white dark:bg-dark dark:text-white">
       <div className="logo-parent w-[500px]">
-        <img className="logo w-[400px]" src="/images/logo-black.png" alt="" />
+        <img
+          className="logo w-[400px]"
+          src={`/images/logo-${isDark ? 'white' : 'black'}.png`}
+          alt=""
+        />
       </div>
       <div className="button-container w-[600px] h-[400px] flex flex-col justify-start items-center gap-3">
         <div>

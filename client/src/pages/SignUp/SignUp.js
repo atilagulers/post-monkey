@@ -4,8 +4,11 @@ import {useFormik} from 'formik';
 import {signUpSchema} from 'schemas';
 import {registerUser} from 'services/api';
 import './SignUp.css';
+import {useTheme} from 'contexts/themeContext';
 
 function SignUp() {
+  const {isDark} = useTheme();
+
   const onSubmit = async (values, actions) => {
     await registerUser(values);
     actions.resetForm();
@@ -33,7 +36,7 @@ function SignUp() {
   return (
     <div className="form-container w-[600px] mx-auto my-8 flex flex-col justify-center items-center">
       <div className="w-48 mb-5">
-        <img src="/images/logo-black.png" alt="" />
+        <img src={`/images/logo-${isDark ? 'white' : 'black'}.png`} alt="" />
       </div>
 
       <form
