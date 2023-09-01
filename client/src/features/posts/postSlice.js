@@ -1,25 +1,41 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {fetchPostsByUserID} from 'services/api';
+import {fetchPostsByUserID, createPost} from 'services/api';
 
 const initialState = {
   forYou: {
     posts: [],
     loading: false,
+    errorMessage: '',
   },
   friends: {
     posts: [],
     loading: false,
+    errorMessage: '',
   },
   profile: {
     posts: [],
     loading: false,
+    errorMessage: '',
+  },
+  currentPost: {
+    content: '',
+    loading: false,
+    errorMessage: '',
   },
 };
 
-export const fetchProfilePosts = createAsyncThunk(
+export const fetchProfilePostsAsync = createAsyncThunk(
   'posts/fetchProfilePosts',
   async (userId) => {
     const response = await fetchPostsByUserID(userId);
+    return response;
+  }
+);
+
+export const createPostAsync = createAsyncThunk(
+  'posts/createPost',
+  async (postBody) => {
+    const response = await createPost(postBody);
     return response;
   }
 );
@@ -36,16 +52,29 @@ const postSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchProfilePosts.pending, (state) => {
+      .addCase(fetchProfilePostsAsync.pending, (state) => {
         state.profile.loading = true;
       })
-      .addCase(fetchProfilePosts.fulfilled, (state, action) => {
+      .addCase(fetchProfilePostsAsync.fulfilled, (state, action) => {
         state.profile.loading = false;
         state.profile.posts = action.payload;
       })
-      .addCase(fetchProfilePosts.rejected, (state, action) => {
+      .addCase(fetchProfilePostsAsync.rejected, (state) => {
         state.profile.loading = false;
-        console.error('Fetch profile posts error: ', action.error);
+        state.currentPost.errorMessage = 'Network Error.';
+      })
+      .addCase(createPostAsync.pending, (state) => {
+        state.currentPost.loading = true;
+      })
+      .addCase(createPostAsync.fulfilled, (state, action) => {
+        state.currentPost.loading = false;
+        console.log(action.payload);
+        state.profile.posts.unshift(action.payload);
+        state.forYou.posts.unshift(action.payload);
+      })
+      .addCase(createPostAsync.rejected, (state) => {
+        state.currentPost.loading = false;
+        state.currentPost.errorMessage = 'Post could not be created.';
       });
   },
 });

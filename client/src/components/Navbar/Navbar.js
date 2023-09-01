@@ -10,7 +10,7 @@ function Navbar() {
   const {toggleTheme, isDark} = useTheme();
 
   return (
-    <>
+    <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
       {token && (
         <nav
           className={`navbar top-0 left-0 m-0 shadow-lg  bg-white dark:bg-dark`}
@@ -43,7 +43,7 @@ function Navbar() {
           </div>
         </nav>
       )}
-    </>
+    </header>
   );
 }
 

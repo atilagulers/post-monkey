@@ -14,9 +14,9 @@ import SignUp from 'pages/SignUp/SignUp';
 // Components
 import Navbar from 'components/Navbar/Navbar';
 import TopLogo from 'components/TopLogo';
+import SideContent from 'components/Common/SideContent';
 
 // Auth
-import {useSelector} from 'react-redux';
 import PrivateRoute from 'components/PrivateRoute';
 
 // Context
@@ -31,13 +31,8 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div
-          className="app bg-white dark:bg-dark mx-auto flex"
-          style={{backgroundColor: 'white'}}
-        >
-          <header className="border-r border-gray-300 dark:border-gray-700  bg-dark">
-            <Navbar />
-          </header>
+        <div className="app bg-white dark:bg-dark mx-auto flex">
+          <Navbar />
 
           <main className="w-full bg-white dark:bg-dark overflow-auto flex">
             <div className="page w-full">
@@ -66,14 +61,8 @@ function App() {
                 />
               </Routes>
             </div>
-            <div className="side-content w-full p-5 border-l border-gray-300 dark:border-gray-700 shadow">
-              <div className="w-[250px]">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Omnis
-                perferendis animi illo deserunt incidunt blanditiis excepturi
-                vitae eius. Sed necessitatibus ipsa ex. Eaque quas pariatur
-                omnis nobis quo maiores magni.
-              </div>
-            </div>
+
+            <SideContent />
           </main>
         </div>
       </BrowserRouter>

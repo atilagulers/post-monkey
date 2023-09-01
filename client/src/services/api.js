@@ -38,6 +38,7 @@ export const loginUser = async (user) => {
     const response = await api.post('/auth/login', user);
     return response.data;
   } catch (error) {
+    console.error('Login error: ', error);
     throw error;
   }
 };
@@ -50,7 +51,18 @@ export const fetchPostsByUserID = async (username) => {
 
     return response.data;
   } catch (error) {
-    console.error('Login error: ', error);
+    console.error('Fetch post error: ', error);
+    throw error;
+  }
+};
+
+export const createPost = async (postBody) => {
+  try {
+    const response = await api.post(`/posts`, postBody);
+
+    return response.data;
+  } catch (error) {
+    console.error('Create post error: ', error);
     throw error;
   }
 };

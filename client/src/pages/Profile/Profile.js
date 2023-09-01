@@ -3,7 +3,7 @@ import PageWrapper from 'components/PageWrapper/PageWrapper';
 import Post from 'components/Post/Post';
 import {useSelector, useDispatch} from 'react-redux';
 import {setProfilePosts} from 'features/posts/postSlice';
-import {fetchProfilePosts} from 'features/posts/postSlice';
+import {fetchProfilePostsAsync} from 'features/posts/postSlice';
 import LoadingSpinner from 'components/Common/LoadingSpinner';
 import CreatePostForm from 'components/CreatePostForm/CreatePostForm';
 
@@ -17,7 +17,7 @@ function Profile() {
   useEffect(() => {
     if (profilePosts.length !== 0) return;
 
-    dispatch(fetchProfilePosts(user._id));
+    dispatch(fetchProfilePostsAsync(user._id));
   }, [dispatch, user._id, profilePosts]);
 
   if (isFetching) return <LoadingSpinner />;
