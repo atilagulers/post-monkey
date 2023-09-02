@@ -2,7 +2,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {fetchPostsByUserID, createPost} from 'services/api';
 
 const initialState = {
-  forYou: {
+  explore: {
     posts: [],
     loading: false,
     errorMessage: '',
@@ -14,6 +14,8 @@ const initialState = {
   },
   profile: {
     posts: [],
+    page: 0,
+    limit: 10,
     loading: false,
     errorMessage: '',
   },
@@ -26,8 +28,9 @@ const initialState = {
 
 export const fetchProfilePostsAsync = createAsyncThunk(
   'posts/fetchProfilePosts',
-  async (userId) => {
-    const response = await fetchPostsByUserID(userId);
+  async ({userId, page, limit}) => {
+    console.log('page: ', page);
+    const response = await fetchPostsByUserID(userId, page, limit);
     return response;
   }
 );
@@ -44,11 +47,11 @@ const postSlice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    addPost: (state, action) => {
-      const newPost = action.post;
-      state.forYouPosts.push(newPost);
-      state.profilePosts.push(newPost);
-    },
+    //increasePage: (state, action) => {
+    //  const newPost = action.post;
+    //  state.explorePosts.push(newPost);
+    //  state.profilePosts.push(newPost);
+    //},
   },
   extraReducers: (builder) => {
     builder
@@ -57,7 +60,8 @@ const postSlice = createSlice({
       })
       .addCase(fetchProfilePostsAsync.fulfilled, (state, action) => {
         state.profile.loading = false;
-        state.profile.posts = action.payload;
+        state.profile.page++;
+        state.profile.posts = [...state.profile.posts, ...action.payload];
       })
       .addCase(fetchProfilePostsAsync.rejected, (state) => {
         state.profile.loading = false;
@@ -68,9 +72,8 @@ const postSlice = createSlice({
       })
       .addCase(createPostAsync.fulfilled, (state, action) => {
         state.currentPost.loading = false;
-        console.log(action.payload);
         state.profile.posts.unshift(action.payload);
-        state.forYou.posts.unshift(action.payload);
+        state.explore.posts.unshift(action.payload);
       })
       .addCase(createPostAsync.rejected, (state) => {
         state.currentPost.loading = false;

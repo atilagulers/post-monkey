@@ -31,11 +31,11 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div className="app bg-white dark:bg-dark mx-auto flex">
+        <div className="app bg-white dark:bg-dark mx-auto flex h-full">
           <Navbar />
 
-          <main className="w-full bg-white dark:bg-dark overflow-auto flex">
-            <div className="page w-full">
+          <main className="w-full bg-white dark:bg-dark flex">
+            <div id={'post-scroll'} className="page w-full overflow-auto">
               <TopLogo />
               <Routes>
                 <Route path="/" element={<SignIn />}></Route>

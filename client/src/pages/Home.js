@@ -18,7 +18,7 @@ function Home() {
         <div className="flex items-end">
           <Tab
             handleClick={handleClickTab}
-            text={'For you'}
+            text={'Explore'}
             tabIndex={0}
             currentTab={currentTab}
           />
@@ -36,7 +36,10 @@ function Home() {
         <Post />
         <Post />
         <Post />
-
+        <Post />
+        <Post />
+        <Post />
+        <Post />
         <button onClick={() => dispatch(logout())} className="btn btn-orange">
           Logout
         </button>

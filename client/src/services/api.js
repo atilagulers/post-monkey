@@ -45,9 +45,11 @@ export const loginUser = async (user) => {
 
 // Post
 
-export const fetchPostsByUserID = async (username) => {
+export const fetchPostsByUserID = async (username, page, limit) => {
   try {
-    const response = await api.get(`/posts/${username}`);
+    const response = await api.get(
+      `/posts/${username}?page=${page}&limit=${limit}`
+    );
 
     return response.data;
   } catch (error) {

@@ -1,10 +1,10 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const homeTabs = {forYou: 0, following: 1};
+const homeTabs = {explore: 0, following: 1};
 
 const initialState = {
   home: {
-    currentTab: homeTabs.forYou,
+    currentTab: homeTabs.explore,
   },
 };
 
