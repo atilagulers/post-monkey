@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import PageWrapper from 'components/PageWrapper/PageWrapper';
 import Post from 'components/Post/Post';
 import {useSelector, useDispatch} from 'react-redux';
@@ -17,45 +17,51 @@ function Profile() {
 
   const dispatch = useDispatch();
   const [loadingMore, setLoadingMore] = useState(false);
+  const [dataEndReached, setDataEndReached] = useState(false);
 
-  const loadMorePosts = async () => {
+  const loadMorePosts = useCallback(async () => {
     setLoadingMore(true);
     try {
-      console.log(page + 1, limit);
       const posts = await dispatch(
-        fetchProfilePostsAsync({userId: user._id, page: page + 1, limit})
+        fetchProfilePostsAsync({userId: user._id, page, limit})
       );
-      console.log(posts);
+
+      if (posts.payload.length < limit) setDataEndReached(true);
     } catch (error) {
       console.log(error);
     } finally {
-      //setLoadingMore(false);
+      setLoadingMore(false);
     }
-  };
-
-  const handleScroll = () => {
-    if (
-      window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight
-    ) {
-      if (loadingMore) return;
-      //loadMorePosts();
-    }
-  };
+  }, [dispatch, user._id, page, limit]);
 
   useEffect(() => {
     const postScrollEl = document.getElementById('post-scroll');
+
+    const handleScroll = () => {
+      const scrollThreshold = 100;
+
+      if (
+        postScrollEl.clientHeight + postScrollEl.scrollTop >=
+        postScrollEl.scrollHeight - scrollThreshold
+      ) {
+        if (loadingMore || dataEndReached) return;
+        loadMorePosts();
+      }
+    };
+
     postScrollEl.addEventListener('scroll', handleScroll);
+
     return () => {
       postScrollEl.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [loadingMore, dataEndReached, loadMorePosts]);
 
   useEffect(() => {
     if (profilePosts.length !== 0) return;
 
-    dispatch(fetchProfilePostsAsync({userId: user._id, page, limit}));
-  }, [dispatch, user._id, profilePosts, limit, page]);
+    loadMorePosts();
+    //dispatch(fetchProfilePostsAsync({userId: user._id, page, limit}));
+  }, [dispatch, user._id, profilePosts, limit, page, loadMorePosts]);
 
   return (
     <PageWrapper title="Profile">

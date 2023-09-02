@@ -14,7 +14,7 @@ const initialState = {
   },
   profile: {
     posts: [],
-    page: 0,
+    page: 1,
     limit: 10,
     loading: false,
     errorMessage: '',
@@ -29,7 +29,6 @@ const initialState = {
 export const fetchProfilePostsAsync = createAsyncThunk(
   'posts/fetchProfilePosts',
   async ({userId, page, limit}) => {
-    console.log('page: ', page);
     const response = await fetchPostsByUserID(userId, page, limit);
     return response;
   }
